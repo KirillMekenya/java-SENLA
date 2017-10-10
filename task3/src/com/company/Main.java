@@ -12,13 +12,10 @@ public class Main {
        process2.productPart = part2;
        LineStep process3 = new LineStep();
        process3.productPart = part3;
-       process1.buildProductPart();
-       process2.buildProductPart();
-       process3.buildProductPart();
        Product product = new Product("Ноутбук");
-       product.part1=part1;
-       product.part2=part2;
-       product.part3=part3;
+       product.part1=process1.buildProductPart();
+       product.part2=process2.buildProductPart();
+       product.part3=process3.buildProductPart();
        realization.assembleProduct(product);
     }
 }
