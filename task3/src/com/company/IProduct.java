@@ -1,7 +1,7 @@
 package com.company;
 
 interface IProduct{
-    void installFirstPart(ProductPart part);
-    void installSecondPart(ProductPart part);
-    void installThirdPart(ProductPart part);
+    void installFirstPart(Keyboard part);
+    void installSecondPart(Monitor part);
+    void installThirdPart(MotherBoard part);
 }
