@@ -14,7 +14,7 @@ public class AssemblyLine implements IAssemblyLine{
         product.installFirstPart(step1.buildProductPart());
         product.installSecondPart(step2.buildProductPart());
         product.installThirdPart(step3.buildProductPart());
-        System.out.println("Сборка продукта " +product.name+" завершена.");
+        System.out.println("Build of product " +product.name+" completed.");
         return product;
     }
 }

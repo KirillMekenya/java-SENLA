@@ -4,7 +4,7 @@ public class MotherBoardStep implements ILineStep{
     MotherBoard motherBoard ;
 
     public MotherBoard buildProductPart(){
-        System.out.println("Изготовление комлектующего "+motherBoard.name);
+        System.out.println("Created accessory "+motherBoard.name);
         return motherBoard;
     }
 

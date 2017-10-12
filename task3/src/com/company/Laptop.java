@@ -11,14 +11,14 @@ public class Laptop implements IProduct{
     }
     public void installFirstPart(Keyboard part){
         this.part1=part;
-        System.out.println("Установка комплектующего "+this.part1.name+" в "+this.name);
+        System.out.println("Install accessory "+this.part1.name+" in "+this.name);
     }
     public void installSecondPart(Monitor part){
         this.part2=part;
-        System.out.println("Установка комплектующего "+this.part2.name+" в "+this.name);
+        System.out.println("Install accessory "+this.part2.name+" in "+this.name);
     }
     public void installThirdPart(MotherBoard part){
         this.part3=part;
-        System.out.println("Установка комплектующего "+this.part3.name+" в "+this.name);
+        System.out.println("Install accessory "+this.part3.name+" in "+this.name);
     }
 }
