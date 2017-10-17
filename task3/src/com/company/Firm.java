@@ -10,4 +10,16 @@ public class Firm {
         }
         return allSalary;
     }
+
+    public void collationFirm() {
+        for (int i = 0; i < 5; i++) {
+            this.employees[i] = new Developer("Vasya", 1000);
+        }
+        Employee director = new Director("Ivan", 15000);
+        this.employees[5] = director;
+        for (int i = 6; i < 10; i++) {
+            this.employees[i] = new QAengineer("Kate", 350);
+        }
+    }
+
 }
