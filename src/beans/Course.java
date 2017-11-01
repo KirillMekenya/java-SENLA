@@ -1,5 +1,7 @@
 package beans;
 
+import facade.Facade;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -8,7 +10,7 @@ import java.util.Date;
 public class Course {
     private String nameOfCourse;
     private Date dateOfStart;
-    private Student[] studentsOfCourse ;
+    private Student[] studentsOfCourse = new Student[10] ;
     private Date dateOfEnd;
     private Lection[] lectionOfCourse;
     private Lecturer lecturerOfCourse;
@@ -110,6 +112,15 @@ public class Course {
 
     public Lecturer getLecturerOfCourse() {
         return lecturerOfCourse;
+    }
+    public int getNumberOfStudents(){
+        int number=0;
+        for(Student student: studentsOfCourse)
+        {
+            if(student!=null)
+                number++;
+        }
+        return number;
     }
 
 
