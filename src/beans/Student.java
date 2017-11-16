@@ -1,19 +1,10 @@
 package beans;
 
-import java.util.Comparator;
-
 public class Student {
-    public static Comparator<Student> SortByName = new Comparator<Student>() {
-        @Override
-        public int compare(Student o1, Student o2) {
-            if (o1 != null && o2 != null) {
-                return o1.getNameOfStudent().compareTo(o2.getNameOfStudent());
-            } else if (o1 != null && o2 == null)
-                return 1;
-            else
-                return -1;
-        }
-    };
+
+
+    private int id;
+
     private String nameOfStudent;
 
     public Student(String name) {
@@ -30,8 +21,15 @@ public class Student {
 
     }
 
-    @Override
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String toString() {
-        return this.nameOfStudent;
+        return this.id + " " + this.nameOfStudent;
     }
 }

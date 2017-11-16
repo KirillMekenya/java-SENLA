@@ -1,6 +1,8 @@
 package managers;
 
 import beans.Lection;
+import comparator.LectionDateComparator;
+import comparator.LectionNameComparator;
 import storages.StorageOfLections;
 
 import java.text.ParseException;
@@ -12,9 +14,8 @@ import java.util.Date;
 public class ManagerOfLection {
     private StorageOfLections storageOfLections;
 
-    public ManagerOfLection()
-    {
-        storageOfLections =new StorageOfLections();
+    public ManagerOfLection() {
+        storageOfLections = new StorageOfLections();
     }
 
     public Lection[] getAllLection() {
@@ -25,54 +26,55 @@ public class ManagerOfLection {
         storageOfLections.addLection(lection);
     }
 
-    public void lectionsOnDate(String dateString){
-        try{
+    public Lection getStudentById(int id) {
+        Lection rLection = null;
+        for (Lection lection : storageOfLections.getAllLection()) {
+            if (lection != null) {
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-            Date date = dateFormat.parse(dateString);
-            Lection[] tempLection = new Lection[300];
-            Calendar calendar = Calendar.getInstance();
-            Calendar calendar1 = Calendar.getInstance();
-            calendar.setTime(date);
-            calendar.set(Calendar.HOUR, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            for(int i = 0; i<storageOfLections.getAllLection().length; i++){
-                if(storageOfLections.getAllLection()[i]!= null){
-
-
-                    calendar1.setTime(storageOfLections.getAllLection()[i].getDate());
-                    calendar1.set(Calendar.HOUR,-10);
-                    calendar1.set(Calendar.MINUTE, 0);
-                    calendar1.set(Calendar.SECOND, 0);
-                    calendar1.set(Calendar.MILLISECOND, 0);
-
-                    if(calendar.equals(calendar1)){
-
-                        tempLection[i]=storageOfLections.getAllLection()[i];
-                        System.out.println(calendar1.getTime());
-                    }
+                if (lection.getId() == id) {
+                    rLection = lection;
                 }
-                //return tempLection;
             }
         }
-        catch (ParseException e){}
-        //return storageOfLections.getAllLection();
-
+        return rLection;
     }
 
-    public void removeLection(String nameOfLection) {
-        storageOfLections.removeLection(nameOfLection);
+    public void lectionsOnDate(String dateString) throws ParseException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = dateFormat.parse(dateString);
+        Lection[] tempLection = new Lection[10];
+        Calendar calendar = Calendar.getInstance();
+        Calendar calendar1 = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar1.setTime(date);
+        calendar.add(Calendar.DATE, 1);
+
+        for (int i = 0; i < storageOfLections.getAllLection().length; i++) {
+            if (storageOfLections.getAllLection()[i] != null) {
+
+                if (storageOfLections.getAllLection()[i].getDate().after(calendar1.getTime()) && storageOfLections.getAllLection()[i].getDate().before(calendar.getTime())) {
+                    tempLection[i] = storageOfLections.getAllLection()[i];
+                    System.out.println(storageOfLections.getAllLection()[i].getNameOfLection());
+                }
+            }
+
+        }
     }
-    public Lection[] sortByName(){
+
+    public void removeLection(int id) {
+        storageOfLections.removeLection(id);
+    }
+
+    public Lection[] sortByName() {
         Lection[] temp = getAllLection();
-        Arrays.sort(temp,Lection.SortByName);
+        Arrays.sort(temp, new LectionNameComparator());
         return temp;
     }
-    public Lection[] sortByDate(){
+
+    public Lection[] sortByDate() {
         Lection[] temp = getAllLection();
-        Arrays.sort(temp, Lection.SortByDate);
+        Arrays.sort(temp, new LectionDateComparator());
         return temp;
     }
 }

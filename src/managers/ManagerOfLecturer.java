@@ -1,6 +1,7 @@
 package managers;
 
 import beans.Lecturer;
+import comparator.LecturerByNameComparator;
 import storages.StorageOfLectures;
 
 import java.util.Arrays;
@@ -25,13 +26,26 @@ public class ManagerOfLecturer {
         storageOfLectures.addLecturer(lecturer);
     }
 
-    public void removeLecturer(String nameOfLecturer) {
-        storageOfLectures.removeLecturer(nameOfLecturer);
+    public Lecturer getLecturerById(int id) {
+        Lecturer rLecturer = null;
+        for (Lecturer lecturer : storageOfLectures.getAllLecturer()) {
+            if (lecturer != null) {
+
+                if (lecturer.getId() == id) {
+                    rLecturer = lecturer;
+                }
+            }
+        }
+        return rLecturer;
+    }
+
+    public void removeLecturer(int id) {
+        storageOfLectures.removeLecturer(id);
     }
 
     public Lecturer[] sortByName() {
         Lecturer[] temp = getAllLecturer();
-        Arrays.sort(temp, Lecturer.SortByName);
+        Arrays.sort(temp, new LecturerByNameComparator());
         return temp;
     }
 }

@@ -2,8 +2,11 @@ package storages;
 
 import beans.Lecturer;
 
+import java.util.Arrays;
+
 public class StorageOfLectures {
-    private Lecturer[] allLecturer = new Lecturer[300];
+    private Lecturer[] allLecturer = new Lecturer[10];
+    private int lastId;
 
     public Lecturer[] getAllLecturer() {
         return allLecturer;
@@ -19,17 +22,30 @@ public class StorageOfLectures {
     }
 
     public void addLecturer(Lecturer lecturer) {
+        boolean check = false;
+        for (int i = 0; i < allLecturer.length; i++) {
+            if (allLecturer[i] == null) {
+                check = true;
+                break;
+            }
+        }
+
+        if (check == false) {
+            allLecturer = Arrays.copyOf(allLecturer, allLecturer.length * 2);
+        }
         for (int i = 0; i < allLecturer.length; i++) {
             if (allLecturer[i] == null) {
                 allLecturer[i] = lecturer;
+                allLecturer[i].setId(this.lastId + 1);
+                this.lastId = allLecturer[i].getId();
                 break;
             }
         }
     }
 
-    public void removeLecturer(String nameOfLecturer) {
+    public void removeLecturer(int id) {
         for (int i = 0; i < allLecturer.length; i++) {
-            if (allLecturer[i] != null && allLecturer[i].getNameOfLecturer().equals(nameOfLecturer)) {
+            if (allLecturer[i] != null && allLecturer[i].getId() == id) {
                 allLecturer[i] = null;
             }
         }

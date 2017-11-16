@@ -1,26 +1,22 @@
 package beans;
 
-import java.util.Comparator;
-
 public class Lecturer {
+    private int id;
     private String nameOfLecturer;
     private Course course;
 
-    public Lecturer(String nameOfLecturer){
+    public Lecturer(String nameOfLecturer) {
         this.nameOfLecturer = nameOfLecturer;
     }
 
-    public static Comparator<Lecturer> SortByName = new Comparator<Lecturer>() {
-        @Override
-        public int compare(Lecturer o1, Lecturer o2) {
-            if (o1 != null && o2 != null) {
-                return o1.getNameOfLecturer().compareTo(o2.getNameOfLecturer());
-            } else if (o1 != null && o2 == null)
-                return 1;
-            else
-                return -1;
-        }
-    };
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Course getCourse() {
         return course;
@@ -36,5 +32,10 @@ public class Lecturer {
 
     public void setNameOfLecturer(String nameOfLecturer) {
         this.nameOfLecturer = nameOfLecturer;
+    }
+
+    @Override
+    public String toString() {
+        return this.id + " " + this.nameOfLecturer + " " + this.course.getNameOfCourse();
     }
 }
