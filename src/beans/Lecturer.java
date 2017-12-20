@@ -3,7 +3,7 @@ package beans;
 public class Lecturer {
     private int id;
     private String nameOfLecturer;
-    private Course course;
+    private int courseId;
 
     public Lecturer(String nameOfLecturer) {
         this.nameOfLecturer = nameOfLecturer;
@@ -18,12 +18,12 @@ public class Lecturer {
         this.id = id;
     }
 
-    public Course getCourse() {
-        return course;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
     public String getNameOfLecturer() {
@@ -36,6 +36,6 @@ public class Lecturer {
 
     @Override
     public String toString() {
-        return this.id + " " + this.nameOfLecturer + " " + this.course.getNameOfCourse();
+        return this.id + " " + this.nameOfLecturer + " " + this.courseId;
     }
 }

@@ -2,13 +2,14 @@ package beans;
 
 public class Student {
 
-
     private int id;
-
     private String nameOfStudent;
+    private int idCourse;
 
-    public Student(String name) {
+    public Student(int id,String name,int idCourse) {
         this.nameOfStudent = name;
+        this.id = id;
+        this.idCourse = idCourse;
     }
 
     public String getNameOfStudent() {
@@ -21,6 +22,14 @@ public class Student {
 
     }
 
+    public int getIdCourse() {
+        return idCourse;
+    }
+
+    public void setIdCourse(int idCourse) {
+        this.idCourse = idCourse;
+    }
+
     public int getId() {
         return id;
     }
@@ -30,6 +39,6 @@ public class Student {
     }
 
     public String toString() {
-        return this.id + " " + this.nameOfStudent;
+        return this.id + " " + this.nameOfStudent + " "+idCourse;
     }
 }

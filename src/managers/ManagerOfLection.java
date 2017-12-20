@@ -26,6 +26,13 @@ public class ManagerOfLection {
         storageOfLections.addLection(lection);
     }
 
+    public void writeToFile() throws Exception{
+        storageOfLections.writeToFile();
+    }
+    public void readFromFile() throws Exception{
+        storageOfLections.readFromFile();
+    }
+
     public Lection getStudentById(int id) {
         Lection rLection = null;
         for (Lection lection : storageOfLections.getAllLection()) {

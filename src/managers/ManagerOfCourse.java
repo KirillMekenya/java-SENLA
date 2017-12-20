@@ -36,8 +36,22 @@ public class ManagerOfCourse {
         storageOfCourse.writeToFile();
     }
 
+    public Course getCourseById(int idCourse){
+        Course course = null;
+        for(Course cour : this.getAllCourses()){
+            if(idCourse == cour.getId()){
+                return cour;
+            }
+        }
+        return course;
+    }
+
     public void readFromFile() {
-        storageOfCourse.readFromFile();
+        try {
+            storageOfCourse.readFromFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Course getStudentById(int id) {

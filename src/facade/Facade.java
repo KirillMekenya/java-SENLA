@@ -9,8 +9,6 @@ import managers.ManagerOfLecturer;
 import managers.ManagerOfStudent;
 
 public class Facade {
-
-
     ManagerOfCourse managerOfCourse;
     ManagerOfLecturer managerOfLecturer;
     ManagerOfLection managerOfLection;
@@ -41,12 +39,15 @@ public class Facade {
     public void printSortLecturerByName() {
         for (Lecturer lecturer : managerOfLecturer.sortByName()) {
             if (lecturer != null)
-                System.out.println(lecturer.getNameOfLecturer() + " " + lecturer.getCourse().getNameOfCourse());
+                System.out.println(lecturer.getNameOfLecturer() + " " + this.getManagerOfCourse().getCourseById(lecturer.getCourseId()));
         }
     }
 
     public void writeCourseToFile() throws Exception {
         managerOfCourse.writeToFile();
+    }
+    public void writeStudentToFile() throws Exception {
+        managerOfStudent.writeToFile();
     }
 
     public void readFromFile() {

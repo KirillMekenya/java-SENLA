@@ -1,5 +1,7 @@
 package beans;
 
+import main.Main;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -13,8 +15,19 @@ public class Course {
     private Student[] studentsOfCourse = new Student[10];
     private Date dateOfEnd;
     private Lection[] lectionOfCourse = new Lection[10];
-    private Lecturer lecturerOfCourse;
+    private int idLecturerOfCourse;
 
+
+    public Course(int id, String nameOfCourse, Date dateOfStart, Date dateOfEnd, int idLecturer) {
+        this.id = id;
+        this.nameOfCourse = nameOfCourse;
+        this.dateOfStart = dateOfStart;
+        this.dateOfEnd = dateOfEnd;
+        this.idLecturerOfCourse = idLecturer;
+    }
+
+    public Course() {
+    }
 
     public void addStudentsOfCourse(Student studentOfCourse) {
         boolean check = false;
@@ -110,13 +123,14 @@ public class Course {
         this.lectionOfCourse = lectionOfCourse;
     }
 
-    public Lecturer getLecturerOfCourse() {
-        return lecturerOfCourse;
+    public int getIdLecturerOfCourse() {
+        return idLecturerOfCourse;
     }
 
-    public void setLecturerOfCourse(Lecturer lecturer) {
-        this.lecturerOfCourse = lecturer;
-        lecturer.setCourse(this);
+    public void setIdLecturerOfCourse(int idLecturer) {
+        this.idLecturerOfCourse = idLecturer;
+        /*
+        lecturer.setCourseId(this.getId());*/
     }
 
     public int getNumberOfStudents() {
@@ -130,6 +144,30 @@ public class Course {
 
     @Override
     public String toString() {
-        return nameOfCourse + " " + dateOfStart.toString() + " " + dateOfEnd.toString() + " " + lecturerOfCourse.getNameOfLecturer() + " ";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy-HH:mm");
+        return id + " " + nameOfCourse + " " + dateFormat.format(dateOfStart) + " " + dateFormat.format(dateOfEnd) + " " + idLecturerOfCourse + " ";
+    }
+
+    public String toPrint(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy-HH:mm");
+        StringBuilder sb = new StringBuilder();
+        sb.append("**************"+"\n\r"+ id + " " + nameOfCourse + " " + dateFormat.format(dateOfStart) + " " + dateFormat.format(dateOfEnd) + " " + idLecturerOfCourse +"\n\r students: ");
+
+       //printStudents(idCourse)
+        for (Student student : Main.facade.getManagerOfStudent().getAllStudents()){
+            if (student!=null&& student.getIdCourse()==id)
+            sb.append(student.getNameOfStudent()+"\n\r");
+        }
+        sb.append("lections: ");
+        //printLections(idCourse)
+        for (Lection lection : Main.facade.getManagerOfLection().getAllLection()){
+            if (lection!=null && lection.getIdCourse()==id)
+                sb.append(lection.getNameOfLection()+"\n\r");
+        }
+        sb.append("Lector:");
+        sb.append(Main.facade.getManagerOfLecturer().getLecturerById(idLecturerOfCourse).getNameOfLecturer());
+        sb.append("\n\r ************************");
+
+        return sb.toString();
     }
 }

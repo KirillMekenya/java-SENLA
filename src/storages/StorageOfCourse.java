@@ -6,7 +6,8 @@ import com.danco.training.TextFileWorker;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class StorageOfCourse {
     private Course[] allCourse = new Course[10];
@@ -28,7 +29,7 @@ public class StorageOfCourse {
     }
 
     public void writeToFile() throws Exception {
-        final String TEST = "d:/course.txt";
+        final String TEST = "d:/java-SENLA/src/course.txt";
         Path filepath = Paths.get(TEST);
         Files.createFile(filepath);
 
@@ -41,19 +42,41 @@ public class StorageOfCourse {
         /**/
     }
 
-    public void readFromFile() {
-        final String TEST = "d:/course.txt";
+    public void readFromFile() throws Exception {
+        final String TEST = "d:/java-SENLA/src/course.txt";
         Path filepath = Paths.get(TEST);
 
         TextFileWorker fileWorker = new TextFileWorker(TEST);
-        Object[] readedValues = fileWorker.readFromFile();
-        for (int i = 0; i < readedValues.length; i++)
-            System.out.println(readedValues[i].toString());
+        String[] courses = fileWorker.readFromFile();
+
+        for (int i = 0; i < courses.length; i++) {
+            if (!courses[i].equals("null")) {
+
+                String[] arr = courses[i].trim().split(" ");
+                int idCourse = Integer.parseInt(arr[0]);
+                String name = arr[1];
+                SimpleDateFormat format = new SimpleDateFormat();
+                format.applyPattern("dd.MM.yyyy-HH:mm");
+                Date dateOfStart = format.parse(arr[2]);
+                Date dateOfEnd = format.parse(arr[3]);
+                int idLecturer = Integer.parseInt(arr[4]);
+
+
+                for (int j = 0; j < allCourse.length; j++) {
+                    if (allCourse[j] == null) {
+                        allCourse[j] = new Course(idCourse, name, dateOfStart, dateOfEnd, idLecturer);
+                        break;
+                    }
+                }
+            }
+
+
+        }
 
     }
 
     public void addCourse(Course course) {
-        boolean check = false;
+        /*boolean check = false;
         for (int i = 0; i < allCourse.length; i++) {
             if (allCourse[i] == null) {
                 check = true;
@@ -63,7 +86,7 @@ public class StorageOfCourse {
 
         if (check == false) {
             allCourse = Arrays.copyOf(allCourse, allCourse.length * 2);
-        }
+        }*/
         for (int i = 0; i < allCourse.length; i++) {
             if (allCourse[i] == null) {
                 allCourse[i] = course;

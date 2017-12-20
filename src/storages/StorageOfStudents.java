@@ -2,8 +2,8 @@ package storages;
 
 import beans.Student;
 import com.danco.training.TextFileWorker;
+import main.Main;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -52,9 +52,9 @@ public class StorageOfStudents {
     }
 
     public void writeToFile() throws Exception {
-        final String TEST = "d:/students.txt";
+        final String TEST = "d:/java-SENLA/src/students.txt";
         Path filepath = Paths.get(TEST);
-        Files.createFile(filepath);
+        //Files.createFile(filepath);
 
         TextFileWorker fileWorker = new TextFileWorker(TEST);
         String[] studentsStringArray = new String[allStudents.length];
@@ -66,29 +66,32 @@ public class StorageOfStudents {
     }
 
     public void readFromFile() {
-        final String TEST = "d:/students.txt";
+        final String TEST = "d:/java-SENLA/src/students.txt";
         Path filepath = Paths.get(TEST);
 
         TextFileWorker fileWorker = new TextFileWorker(TEST);
         String[] students = fileWorker.readFromFile();
 
         for (int i = 0; i < students.length; i++) {
-            if (students[i] != null) {
+            if (!students[i].equals("null")) {
 
                 String[] arr = students[i].trim().split(" ");
                 int id = Integer.parseInt(arr[0]);
                 String name = arr[1];
-                for (int j = 0; j < allStudents.length; i++) {
+                int idCourse = Integer.parseInt(arr[2]);
+
+                for (int j = 0; j < allStudents.length; j++) {
                     if (allStudents[j] == null) {
-                        allStudents[j] = new Student(name);
-                        allStudents[j].setId(id);
+                        allStudents[j] = new Student(id, name, idCourse);
+                        break;
                     }
                 }
             }
-
-
         }
-
+        for (Student student : allStudents) {
+            if (student != null)
+                Main.facade.getManagerOfCourse().getCourseById(student.getIdCourse()).addStudentsOfCourse(student);
+        }
     }
 
 

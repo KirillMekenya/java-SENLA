@@ -25,6 +25,12 @@ public class ManagerOfLecturer {
     public void addLecturer(Lecturer lecturer) {
         storageOfLectures.addLecturer(lecturer);
     }
+    public void writeToFile() throws Exception {
+        storageOfLectures.writeToFile();
+    }
+    public void readFromFile() throws Exception{
+        storageOfLectures.readFromFile();
+    }
 
     public Lecturer getLecturerById(int id) {
         Lecturer rLecturer = null;

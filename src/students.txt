@@ -1,10 +1,10 @@
-1 Kirill
-null
-3 Kirill
-4 Kirill
-5 Kirill
-6 Kirill
-7 Kirill
+1 Kirill 0
+2 Vasya 0
+3 Dima 0
+4 Jora 1
+5 Petya 1
+6 Vova 0
+7 Kirill 0
 null
 null
 null
